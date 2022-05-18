@@ -72,6 +72,9 @@ class HomeFragment : Fragment() {
                     if (it[i].catIsFavorited == true){
                         viewModel.intoFavList(it[i])
                     }
+                    else if(it[i].catIsFavorited == false){
+                        viewModel.deleteFromFavlist(it[i])
+                    }
                     i = i+1
                 }
                 rvCatList.visibility = View.VISIBLE

@@ -109,6 +109,12 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
         }
     }
 
+    fun deleteFromFavlist(cat:Cat){
+        launch(Dispatchers.IO) {
+            CatDatabase(getApplication()).catDao().updateCat(cat)
+        }
+    }
+
     override fun onCleared() {
         super.onCleared()
         disposable.clear()

@@ -41,7 +41,7 @@ data class Cat(
 
     @ColumnInfo(name = "image")
     @SerializedName("image")
-    val catImage: @RawValue Images,
+    val catImage: @RawValue Images?,
 
     @ColumnInfo(name = "catIsFavorited")
     var catIsFavorited: Boolean?,

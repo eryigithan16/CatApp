@@ -1,6 +1,7 @@
 package com.example.kediuygulamasi.viewmodel
 
 import android.app.Application
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.example.kediuygulamasi.model.Cat
@@ -25,9 +26,10 @@ class FavoritesViewModel(application: Application) : BaseViewModel(application){
 
     fun getFavList(){
         launch {
-            val favorites = CatDatabase(getApplication()).catDao().getFavCats()
-            showCats(favorites)
-            Toast.makeText(getApplication(),"Fav Cats from Sql", Toast.LENGTH_LONG).show()
+            favCats.value = CatDatabase(getApplication()).catDao().getFavCats()
+            showCats(favCats.value!!)
+            Log.e("@@@@@@", favCats.value.toString())
+            Toast.makeText(getApplication(),"Fav Cats from Sql" + favCats.value!!.size, Toast.LENGTH_LONG).show()
         }
     }
 

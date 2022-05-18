@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kediuygulamasi.R
 import com.example.kediuygulamasi.adapter.FavoriteCatAdapter
@@ -34,18 +35,23 @@ class FavoritesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(FavoritesViewModel::class.java)
-        viewModel.getFavList()
-
         rvFavCatList.layoutManager = LinearLayoutManager(context)
         rvFavCatList.adapter = favoriteCatAdapter
+        viewModel.getFavList()
+
+        iv_favorites_BackBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         observeLiveData()
     }
 
     private fun observeLiveData(){
         viewModel.favCats.observe(viewLifecycleOwner, Observer {
             it?.let {
-                rvFavCatList.visibility = View.VISIBLE
                 favoriteCatAdapter.updatedFavList(it)
+                rvFavCatList.visibility = View.VISIBLE
+
             }
         })
 

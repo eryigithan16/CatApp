@@ -40,7 +40,7 @@ class CatAdapter(val catList: ArrayList<Cat>):RecyclerView.Adapter<CatAdapter.Ca
         if (catList[position].catIsFavorited==true){
             holder.view.iv_item_AddFavBtn.setImageResource(R.drawable.ic_favorited)
         }
-        holder.view.iv_item_AddFavBtn.setOnClickListener {
+        /*holder.view.iv_item_AddFavBtn.setOnClickListener {
             if (catList[position].catIsFavorited==true){
                 catList[position].catIsFavorited = false
                 holder.view.iv_item_AddFavBtn.setImageResource(R.drawable.ic_empty_star)
@@ -49,6 +49,23 @@ class CatAdapter(val catList: ArrayList<Cat>):RecyclerView.Adapter<CatAdapter.Ca
                 catList[position].catIsFavorited = true
                 holder.view.iv_item_AddFavBtn.setImageResource(R.drawable.ic_favorited)
                 //HomeFragment().viewModel.intoFavList(catList[position])
+            }
+        }*/
+        holder.view.iv_item_AddFavBtn.setOnClickListener {
+            if (catList[position].catIsFavorited == false){
+                catList[position].catIsFavorited = true
+                holder.view.iv_item_AddFavBtn.setImageResource(R.drawable.ic_favorited)
+                notifyDataSetChanged()
+            }
+            else if(catList[position].catIsFavorited == true){
+                catList[position].catIsFavorited = false
+                holder.view.iv_item_AddFavBtn.setImageResource(R.drawable.ic_empty_star)
+                notifyDataSetChanged()
+            }
+            else if(catList[position].catIsFavorited == null){
+                catList[position].catIsFavorited = true
+                holder.view.iv_item_AddFavBtn.setImageResource(R.drawable.ic_favorited)
+                notifyDataSetChanged()
             }
         }
 
