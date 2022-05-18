@@ -29,9 +29,10 @@
             android:id="@+id/action_detailFragment_to_favoritesFragment"
             app:destination="@id/favoritesFragment" />
         <argument
-            android:name="catItemId"
-            android:defaultValue="0"
-            app:argType="integer" />
+            android:name="catItem"
+            android:defaultValue="@null"
+            app:argType="com.example.kediuygulamasi.model.Cat"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
