@@ -10,6 +10,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeViewModel(application: Application) : BaseViewModel(application) {
@@ -20,6 +21,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
     val cats = MutableLiveData<List<Cat>>()
     val catError = MutableLiveData<Boolean>()
     val catLoading = MutableLiveData<Boolean>()
+    // val catIsFavorited = MutableLiveData<Boolean>()
 
     var handler = 1
 
@@ -98,6 +100,12 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
             val cats = CatDatabase(getApplication()).catDao().getAllCats()
             showCats(cats)
             Toast.makeText(getApplication(),"Cats from Sql",Toast.LENGTH_LONG).show()
+        }
+    }
+
+    fun intoFavList(cat: Cat){
+        launch(Dispatchers.IO) {
+            CatDatabase(getApplication()).catDao().insertToFavorites(cat)
         }
     }
 

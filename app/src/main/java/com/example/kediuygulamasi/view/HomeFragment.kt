@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.item_cat.*
 
 class HomeFragment : Fragment() {
 
-    private lateinit var viewModel : HomeViewModel
+    lateinit var viewModel : HomeViewModel
     private val catAdapter = CatAdapter(arrayListOf())
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,8 +41,7 @@ class HomeFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
-        viewModel.showData() //silmeyi dene her şey ok'sa veya burası değişcek
-        //viewModel.getListDataFromSql()
+        viewModel.showData()
 
         iv_home_SearchBtn.setOnClickListener {
             var currentText = etSearch.text.toString()
@@ -55,6 +54,11 @@ class HomeFragment : Fragment() {
             }
         }
 
+        iv_home_Favorites.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToFavoritesFragment()
+            Navigation.findNavController(it).navigate(action)
+        }
+
         rvCatList.layoutManager = LinearLayoutManager(context)
         rvCatList.adapter = catAdapter
         observeLiveData()
@@ -63,6 +67,13 @@ class HomeFragment : Fragment() {
     private fun observeLiveData() {
         viewModel.cats.observe(viewLifecycleOwner, Observer {
             it?.let {
+                var i = 0
+                while (i < it.size){
+                    if (it[i].catIsFavorited == true){
+                        viewModel.intoFavList(it[i])
+                    }
+                    i = i+1
+                }
                 rvCatList.visibility = View.VISIBLE
                 catAdapter.updatedList(it)
             }

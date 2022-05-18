@@ -6,10 +6,12 @@
         <entry key="app/src/main/res/drawable/ic_back.xml" value="0.215" />
         <entry key="app/src/main/res/drawable/ic_empty_star.xml" value="0.1355" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.31666666666666665" />
+        <entry key="app/src/main/res/layout/fav_cat.xml" value="1.6036184210526316" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_favorites.xml" value="0.31666666666666665" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_cat.xml" value="0.31666666666666665" />
+        <entry key="app/src/main/res/layout/item_fav_cat.xml" value="0.32760416666666664" />
       </map>
     </option>
   </component>

@@ -1,18 +1,21 @@
 package com.example.kediuygulamasi.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kediuygulamasi.R
 import com.example.kediuygulamasi.model.Cat
-import com.example.kediuygulamasi.util.ImageTypeConverter
 import com.example.kediuygulamasi.util.getImageFromUrl
 import com.example.kediuygulamasi.util.placeholderProgessBar
+import com.example.kediuygulamasi.view.HomeFragment
 import com.example.kediuygulamasi.view.HomeFragmentDirections
+import com.example.kediuygulamasi.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.item_cat.view.*
+
+
 
 class CatAdapter(val catList: ArrayList<Cat>):RecyclerView.Adapter<CatAdapter.CatViewHolder>() {
 
@@ -31,7 +34,7 @@ class CatAdapter(val catList: ArrayList<Cat>):RecyclerView.Adapter<CatAdapter.Ca
         holder.view.tv_item_CatName.text = catList[position].catName
         if (catList[position].catImage != null){
             holder.view.iv_item_CatImage.getImageFromUrl(catList[position].catImage?.url, placeholderProgessBar(holder.view.context))
-            Log.e("@@@@@1", catList[position].catImage?.url.toString())
+            //Log.e("@@@@@1", catList[position].catImage?.url.toString())
         }
         //favoriteye tıklanınca şu olcak tarzı bi onClick de yazılabilir aşşağıdaki gibi if de olabilir sonra bak.
         if (catList[position].catIsFavorited==true){
@@ -45,6 +48,7 @@ class CatAdapter(val catList: ArrayList<Cat>):RecyclerView.Adapter<CatAdapter.Ca
             else{
                 catList[position].catIsFavorited = true
                 holder.view.iv_item_AddFavBtn.setImageResource(R.drawable.ic_favorited)
+                //HomeFragment().viewModel.intoFavList(catList[position])
             }
         }
 

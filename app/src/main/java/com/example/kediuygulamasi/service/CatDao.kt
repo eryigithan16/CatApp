@@ -1,8 +1,6 @@
 package com.example.kediuygulamasi.service
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.example.kediuygulamasi.model.Cat
 
 @Dao
@@ -12,11 +10,17 @@ interface CatDao {
     suspend fun insertAll(vararg cats: Cat) : List<Long>
     //bir tane de insertFavCats yazmalı mıyım bunu denicem hata alırsam
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertToFavorites(cat : Cat)
+
     @Query("SELECT * FROM cat")
     suspend fun getAllCats() : List<Cat>
 
     @Query("SELECT * FROM cat WHERE catIsFavorited = 1")
     suspend fun getFavCats() : List<Cat>
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun updateCat(cat : Cat)
 
     @Query("SELECT * FROM cat WHERE catId= :catId")
     suspend fun getCat(catId : Int) : Cat
